@@ -34,7 +34,7 @@ parameters = {
 model = TextGenerationModel.from_pretrained("text-bison")
 
 st.title('Spam Email Classifier')
-st.head('This app predicts whether an email is spam or not')
+st.header('This app predicts whether an email is spam or not')
 st.write('Please enter your mail details below')
 
 mail_sender=st.text_input('Enter the sender of the mail')
