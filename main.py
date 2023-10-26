@@ -34,17 +34,24 @@ parameters = {
 model = TextGenerationModel.from_pretrained("text-bison")
 
 st.title('Spam Email Classifier')
-st.write('This app predicts whether an email is spam or not')
+st.head('This app predicts whether an email is spam or not')
 st.write('Please enter your mail details below')
 
 mail_sender=st.text_input('Enter the sender of the mail')
 mail_subject=st.text_input('Enter the subject of the mail')
 mail=st.text_area('Paste your email here')
 
-request_string = "provided the body of the mail , what are the chances of this mail being a spam  and if so why ? \n\n\n" + "sender mail = "+ mail_sender + "\n\n mail subject = " + mail_subject + "\n\n mail = "  + mail
 
-
-
-response = model.predict(
-    request_string,**parameters)
-st.write(response.text)
+scan_button = st.button('Scan')
+if scan_button:
+    if mail_sender == '':
+        mail_sender = 'not provided'
+    if mail_subject == '':
+        mail_subject = 'not provided'
+    if mail != '':
+        request_string = "provided the body of the mail , what are the chances of this mail being a spam  and if so why ? \n\n\n" + "sender mail = "+ mail_sender + "\n\n mail subject = " + mail_subject + "\n\n mail = "  + mail
+        st.write('Scanning mail...')
+        response = model.predict(
+            request_string,
+            **parameters)
+        st.write(response.text)
