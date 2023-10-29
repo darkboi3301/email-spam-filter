@@ -24,14 +24,7 @@ service_account_creds={
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './privcreds.json'
 vertexai.init(project="orbital-nova-365616", location="us-central1")
-parameters = {
-    "candidate_count": 1,
-    "max_output_tokens": 200,
-    "temperature": 0.2,
-    "top_p": 0.8,
-    "top_k": 40
-}
-model = TextGenerationModel.from_pretrained("text-bison")
+
 
 st.title('Spam Email Classifier')
 st.header('This app predicts whether an email is spam or not')
@@ -40,6 +33,22 @@ st.write('Please enter your mail details below')
 mail_sender=st.text_input('Enter the sender of the mail')
 mail_subject=st.text_input('Enter the subject of the mail')
 mail=st.text_area('Paste your email here')
+
+with st.expander('Advanced Options'):
+    temprature = st.slider('Select temprature', 0.0, 1.0, 0.2)
+    output_tokens = st.slider('Select max output tokens', 0, 1000, 200)
+    model_v = st.selectbox('Select Palm model', ['text-bison', 'text-bison-32k', 'text-bison@001'])
+    
+
+
+parameters = {
+    "candidate_count": 1,
+    "max_output_tokens": 200,
+    "temperature": 0.2,
+    "top_p": 0.8,
+    "top_k": 40
+}
+model = TextGenerationModel.from_pretrained(model_v)
 
 
 scan_button = st.button('Scan')
