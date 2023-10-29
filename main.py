@@ -77,7 +77,7 @@ if scan_button:
     if mail != '':
         request_string = "provided the body of the mail , what are the chances of this mail being a spam  and if so why ? \n\n\n" + "sender mail = "+ mail_sender + "\n\n mail subject = " + mail_subject + "\n\n mail = "  + mail
         st.write('Scanning mail...')
-        with st.spinner(''):
+        with st.spinner('Getting response from Palm 2...'):
             response = model.predict(
             request_string,
             **parameters)
