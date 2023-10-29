@@ -35,7 +35,7 @@ mail_subject=st.text_input('Enter the subject of the mail')
 mail=st.text_area('Paste your email here')
 
 with st.expander('Advanced Options'):
-    temprature = st.slider('Select temprature', 0.0, 1.0, 0.2)
+    temperature = st.slider('Select temprature', 0.0, 1.0, 0.2)
     output_tokens = st.slider('Select max output tokens', 0, 1000, 200)
     model_v = st.selectbox('Select Palm model', ['text-bison', 'text-bison-32k', 'text-bison@001'])
     
@@ -43,8 +43,8 @@ with st.expander('Advanced Options'):
 
 parameters = {
     "candidate_count": 1,
-    "max_output_tokens": 200,
-    "temperature": 0.2,
+    "max_output_tokens": output_tokens,
+    "temperature": temperature,
     "top_p": 0.8,
     "top_k": 40
 }
