@@ -8,10 +8,16 @@ import vertexai
 from vertexai.language_models import TextGenerationModel
 import os
 
-st.set_page_config(page_title='Spam Email Classifier', page_icon='📧', layout='centered', initial_sidebar_state='auto')
+st.set_page_config(page_title='Spam Email Classifier',
+    page_icon='📧',
+    layout='centered', 
+    initial_sidebar_state='auto'
+    )
 
 
-st.toast("All Requred Libraries Imported",icon='🎉')
+st.toast("All Requred Libraries Imported",
+    icon='🎉'
+    )
 
 
 service_account_creds={
@@ -71,7 +77,8 @@ if scan_button:
     if mail != '':
         request_string = "provided the body of the mail , what are the chances of this mail being a spam  and if so why ? \n\n\n" + "sender mail = "+ mail_sender + "\n\n mail subject = " + mail_subject + "\n\n mail = "  + mail
         st.write('Scanning mail...')
-        response = model.predict(
+        with st.spinner(''):
+            response = model.predict(
             request_string,
             **parameters)
         st.write(response.text)
