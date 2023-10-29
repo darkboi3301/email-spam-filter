@@ -33,35 +33,32 @@ vertexai.init(project="orbital-nova-365616", location="us-central1")
 
 st.toast("Connected To Google Palm 2",icon='🎉')
 
-def write_content():
-    st.title('Spam Email Classifier')
-    st.header('This app predicts whether an email is spam or not')
-    st.write('This app uses the Palm 2 model to predict whether an email is spam or not')
 
-    st.subheader('Please enter your mail details below')
+st.title('Spam Email Classifier')
+st.header('This app predicts whether an email is spam or not')
+st.write('This app uses the Palm 2 model to predict whether an email is spam or not')
 
-    mail_sender=st.text_input('Enter the sender of the mail')
-    mail_subject=st.text_input('Enter the subject of the mail')
-    mail=st.text_area('Paste your email here')
+st.subheader('Please enter your mail details below')
 
-    with st.expander('Advanced Options'):
-        temperature = st.slider('Select temprature', 0.0, 1.0, 0.2)
-        output_tokens = st.slider('Select max output tokens', 0, 1000, 200)
-        model_v = st.selectbox('Select Palm model', ['text-bison', 'text-bison-32k', 'text-bison@001'])
+mail_sender=st.text_input('Enter the sender of the mail')
+mail_subject=st.text_input('Enter the subject of the mail')
+mail=st.text_area('Paste your email here')
 
-    parameters = {
+with st.expander('Advanced Options'):
+    temperature = st.slider('Select temprature', 0.0, 1.0, 0.2)
+    output_tokens = st.slider('Select max output tokens', 0, 1000, 200)
+    model_v = st.selectbox('Select Palm model', ['text-bison', 'text-bison-32k', 'text-bison@001'])
+    
+
+
+
+parameters = {
     "candidate_count": 1,
     "max_output_tokens": output_tokens,
     "temperature": temperature,
     "top_p": 0.8,
     "top_k": 40
 }
-    
-
-write_content()
-
-
-
 model = TextGenerationModel.from_pretrained(model_v)
 
 
